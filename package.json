@@ -1,0 +1,31 @@
+{
+  "name": "component-rpc",
+  "description": "RPC component",
+  "version": "1.0.0",
+  "author": "Vasily Khayrulin <sirianru@gmail.com>",
+  "license": "ISC",
+  "keywords": ["rpc"],
+  "bugs": {
+    "url": "https://github.com/sirian/node-component-rpc/issues/new"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sirian/node-component-rpc.git"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "typings": "dist/index.d.ts",
+  "dependencies": {
+
+  },
+  "devDependencies": {
+    "@types/node": "^6.0.37",
+    "@types/tape": "^4.2.27",
+    "tape": "^4.6.0"
+  },
+  "scripts": {
+    "watch": "tsc -w",
+    "build": "rm -rf dist && tsc",
+    "test": "tape 'dist/Test/**/*.js'"
+  }
+}
