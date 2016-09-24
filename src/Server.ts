@@ -32,7 +32,7 @@ export class Server {
 
         socket.on('error', async (e) => {
             try {
-                socket.close();
+                await this.close();
             } catch (ignored) {
             }
 
@@ -79,6 +79,8 @@ export class Server {
             }
         });
 
+        conn.on('end', () => {});
+
         conn.on('error', (e) => {
             conn.end();
         });
@@ -103,25 +105,25 @@ export class Server {
     };
 
     start() {
-        this.listen();
+        return this.listen();
     };
 
-    listen() {
+    async listen() {
         clearTimeout(this.retryTimeout);
 
         let o = this.options;
 
         if (this.connected) {
-            this.socket.close();
+            await this.close();
         }
-
-        this.socket.listen(o.port, o.host)
+        return new Promise((resolve) => this.socket.listen(o.port, o.host, resolve))
     };
 
-    close() {
-        return new Promise((resolve) => {
-            this.socket.close(() => resolve())
-        });
+    async close() {
+        if (!this.connected) {
+            return;
+        }
+        return new Promise((resolve) => this.socket.close(resolve));
     }
 }
 

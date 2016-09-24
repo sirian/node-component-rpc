@@ -11,17 +11,16 @@ tape('testServer', async (t) => {
         return a + b;
     });
 
-    server.listen();
+    await server.listen();
 
-    setTimeout(async () => {
-        let client = new Client(options);
-        try {
+    let client = new Client(options);
+    try {
         let res = await client.execute('sum', 1, 2);
-            t.equal(res, 3);
-            server.close();
-            client.end();
-        } catch (e) {
-            t.fail(e);
-        }
-    }, 100);
+
+        t.equal(res, 3);
+        
+        await server.close();
+    } catch (e) {
+        t.fail(e);
+    }
 });

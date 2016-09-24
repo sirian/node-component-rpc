@@ -78,10 +78,6 @@ export class ClientSocket {
         });
     }
 
-    isClosed() {
-        return this.closed;
-    }
-
     end() {
         if (this.closed) {
             return;

@@ -12,17 +12,11 @@ export class Client {
         this.options = options;
     }
 
-    execute(method, ...args)  {
-        if (!this.socket || this.socket.isClosed()) {
-            this.socket = this.createSocket();
-        }
-        return this.socket.execute(method, ...args);
-    }
-
-    end() {
-        if (this.socket) {
-            this.socket.end();
-        }
+    async execute(method, ...args)  {
+        let socket = this.createSocket();
+        let result = await socket.execute(method, ...args);
+        socket.end();
+        return result;
     }
 
     protected createSocket():ClientSocket {
