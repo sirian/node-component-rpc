@@ -19,7 +19,7 @@
 
   },
   "devDependencies": {
-    "@types/node": "^6.0.37",
+    "@types/node": "^10.5.2",
     "@types/tape": "^4.2.27",
     "tape": "^4.6.0"
   },
